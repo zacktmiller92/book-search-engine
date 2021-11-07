@@ -60,6 +60,16 @@ const resolvers = {
       }
       throw new AuthenticationError('You need to be logged in!');
     },
+
+    saveBook: async (parent, { bookId }) => {
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: user._id },
+      { $addToSet: { savedBooks: body } },
+      { new: true, runValidators: true }
+    );
+    return res.json(updatedUser);
+    }
+
     // addThought: async (parent, args, context) => {
     //   if (context.user) {
     //     const thought = await Thought.create({ ...args, username: context.user.username });
