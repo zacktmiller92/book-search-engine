@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Thought } = require('../models');
+const { User, Book } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -46,7 +46,20 @@ const resolvers = {
 
       const token = signToken(user);
       return { token, user };
-    }
+    },
+
+    removeBook: async (parent, { bookId }) => {
+      const updatedUser = await User.findOneAndUpdate(
+        { _id: user._id },
+        { $pull: { savedBooks: { bookId: params.bookId } } },
+        { new: true }
+      );
+
+      if (!updatedUser) {
+        return User;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
     // addThought: async (parent, args, context) => {
     //   if (context.user) {
     //     const thought = await Thought.create({ ...args, username: context.user.username });
