@@ -14,10 +14,10 @@ This project uses the Google Books API and local storage to save books to a user
 
 
 ## Deployed URL
-
+https://book-search-engine-rut.herokuapp.com/
 
 ## Screenshot
-![Screenshot]()
+![Screenshot](screenshot.PNG)
 
 ## Credits
 Created by Zack Miller at Rutgers Coding Bootcamp
